@@ -1,0 +1,1 @@
+ /home/enogie/StudioProjects/amazon_ui/.dart_tool/flutter_build/842fd59f9df3dd11dd154765172f27ee/dart_build_result.json: 
