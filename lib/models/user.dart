@@ -23,7 +23,7 @@ class User {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id, // This is supposed to be '_id' and not 'id'
+      '_id': id, // This is supposed to be '_id' and not 'id'
       'name': name,
       'password': password,
       'email': email,

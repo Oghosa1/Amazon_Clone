@@ -65,46 +65,47 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8'
         },
       );
-      print(res.body);
+      
       httpErrorHandle(
           response: res,
           context: context,
           onSuccess: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
-            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-            await prefs.setString(
-                'x-auth-token', jsonDecode(res.body)['token']);
-            Navigator.pushNamedAndRemoveUntil(
-                context, HomeScreen.routeName, (route) => false);
-
-            showSnackBar(context, 'Log in successful!');
+            final responseData = jsonDecode(res.body);
+            final token = responseData['token'] as String?;
+            
+            if (token != null) {
+              await prefs.setString('x-auth-token', token);
+              Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, HomeScreen.routeName, (route) => false);
+              showSnackBar(context, 'Log in successful!');
+            } else {
+              showSnackBar(context, 'Invalid response from server');
+            }
           });
     } catch (e) {
       showSnackBar(context, e.toString());
     }
   }
-}
 
-
-
- // Get user data
-  void getUserData(
+  // Get user data
+  Future<bool> getUserData(
      BuildContext context,
   ) async {
     try {
-
-
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('x-auth-token');
 
       if(token == null){
         prefs.setString('x-auth-token', '');
+        return false;
       }
       
       var tokenRes = await http.post(Uri.parse('$uri/api/tokenIsValid'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': token!
+        'x-auth-token': token
       }
       );
 
@@ -120,9 +121,13 @@ class AuthService {
 
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
-        }
+        return true;
+      }
+      return false;
     } catch (e) {
       showSnackBar(context, e.toString());
+      return false;
     }
   }
+}
 
