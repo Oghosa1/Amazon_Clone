@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../constants/global_variable.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_text_field.dart';
-import '../services/auth_service.dart';
+import '../../constants/global_variable.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/custom_text_field.dart';
+import '../../core/services/auth_service.dart';
 
 enum Auth { signin, signup }
 
@@ -47,6 +47,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void signInUser() {
+    
     authService.signInUser(
       context: context,
       email: _emailController.text,
@@ -174,7 +175,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       CustomButton(
                           text: 'Sign In',
                           onTap: () {
-                            if (_signInFormKey.currentState!.validate()) {
+                            if (_signInFormKey.currentState!.validate()) {                        
                               signInUser();
                             }
                           })

@@ -1,7 +1,8 @@
 
+import 'package:amazon_ui/common/bottom_bar.dart';
 import 'package:flutter/material.dart';
 
-import 'screen/auth_screen.dart';
+import 'views/screen/auth_screen.dart';
 import 'home/screens/home_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -17,6 +18,9 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const HomeScreen(),
       );
+
+      case BottomBar.routeName:
+      return MaterialPageRoute(builder: (_) => const BottomBar());
 
     default:
       return MaterialPageRoute(

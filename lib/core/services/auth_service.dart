@@ -1,16 +1,16 @@
 import 'dart:convert';
+import 'package:amazon_ui/common/bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../constants/errror_hadling.dart';
-import '../constants/global_variable.dart';
-import '../constants/utils.dart';
-import '../home/screens/home_screen.dart';
-import '../models/user.dart';
+import '../../constants/errror_hadling.dart';
+import '../../constants/global_variable.dart';
+import '../utils/utils.dart';
+import '../../models/user.dart';
 import 'package:http/http.dart' as http;
 
-import '../providers/user_provider.dart';
+import '../../providers/user_provider.dart';
 
 class AuthService {
   // Sign up user
@@ -55,6 +55,7 @@ class AuthService {
     required String password,
   }) async {
     try {
+      print('Attempting to login with email: $email');
       http.Response res = await http.post(
         Uri.parse('$uri/api/login'),
         body: jsonEncode({
@@ -66,6 +67,9 @@ class AuthService {
         },
       );
       
+      print('Login response status: ${res.statusCode}');
+      print('Login response body: ${res.body}');
+      
       httpErrorHandle(
           response: res,
           context: context,
@@ -75,16 +79,19 @@ class AuthService {
             final token = responseData['token'] as String?;
             
             if (token != null) {
+              print('Token received: $token');
               await prefs.setString('x-auth-token', token);
               Provider.of<UserProvider>(context, listen: false).setUser(res.body);
               Navigator.pushNamedAndRemoveUntil(
-                  context, HomeScreen.routeName, (route) => false);
+                  context, BottomBar.routeName, (route) => false);
               showSnackBar(context, 'Log in successful!');
             } else {
+              print('No token in response');
               showSnackBar(context, 'Invalid response from server');
             }
           });
     } catch (e) {
+      print('Login error: $e');
       showSnackBar(context, e.toString());
     }
   }

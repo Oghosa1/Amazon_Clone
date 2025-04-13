@@ -1,12 +1,12 @@
-import 'package:amazon_ui/home/screens/home_screen.dart';
 import 'package:amazon_ui/providers/user_provider.dart';
 import 'package:amazon_ui/router.dart';
-import 'package:amazon_ui/services/auth_service.dart';
+import 'package:amazon_ui/core/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/global_variable.dart';
-import 'screen/auth_screen.dart';
+import 'views/screen/auth_screen.dart';
+import 'package:amazon_ui/common/bottom_bar.dart';
 
 void main() {
   runApp(
@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: (settings) => generateRoute(settings),
       home:
           Provider.of<UserProvider>(context).user.token.isNotEmpty
-              ? const HomeScreen()
+              ? const BottomBar()
               : const AuthScreen(),
     );
   }

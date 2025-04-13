@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 //Render
-String uri = 'http://192.168.114.232:3000';
-// String uri = 'https://amazon-server-ij8c.onrender.com';
+// String uri = 'http://192.168.123.232:3000';
+String uri = 'https://amazon-backend-ay5c.onrender.com';
+
 
 class GlobalVariables {
   // COLORS
