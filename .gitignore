@@ -1,0 +1,5 @@
+.qodo
+**/build/outputs/apk/
+.dart_tool/
+.idea/
+.vscode/
