@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 //Render
 // String uri = 'http://192.168.123.232:3000';
-String uri = '';
+String uri = 'https://amazon-backend-ay5c.onrender.com';
 
 
 class GlobalVariables {
@@ -22,6 +22,8 @@ class GlobalVariables {
   static const unselectedNavBarColor = Colors.black87;
 
   static const String dealOfTheDay = 'https://images.unsplash.com/photo-1745905932716-431e50eac74b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw4fHx8ZW58MHx8fHx8';
+  static const String products = "https://images.unsplash.com/photo-1733507267119-5b7ea4a989cb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8";
+  
 
   // STATIC IMAGES
   static const List<String> carouselImages = [

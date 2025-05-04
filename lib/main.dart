@@ -1,6 +1,8 @@
+
 import 'package:amazon_ui/providers/user_provider.dart';
 import 'package:amazon_ui/router.dart';
 import 'package:amazon_ui/core/services/auth_service.dart';
+import 'package:amazon_ui/screen/screens/admins/admin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,9 +57,14 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home:
+          // First condition: Check if the user is authenticated by examining their token
           Provider.of<UserProvider>(context).user.token.isNotEmpty
-              ? const BottomBar()
-              : const AuthScreen(),
+              ? // If user IS authenticated (token exists), check their user type
+                Provider.of<UserProvider>(context).user.type == 'user' 
+                    ? const BottomBar()  // If user type is 'user', show the regular user interface (BottomBar)
+                    : const AdminScreen()  // If user type is NOT 'user' (presumably 'admin'), show the admin interface
+              : // If user is NOT authenticated (empty token)
+                const AuthScreen(),  // Show the authentication screen to log in
     );
   }
 }

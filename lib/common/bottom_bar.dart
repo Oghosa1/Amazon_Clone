@@ -1,5 +1,5 @@
 import 'package:amazon_ui/constants/global_variable.dart';
-import 'package:amazon_ui/screen/home/home_screen.dart';
+import 'package:amazon_ui/screen/screens/users/home_screen.dart';
 import 'package:amazon_ui/screen/settings/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;

@@ -1,0 +1,5 @@
+# Augment ignore file
+# Files and directories listed here will be ignored by Augment
+
+# Ignore global_variable.dart
+lib/constants/global_variable.dart

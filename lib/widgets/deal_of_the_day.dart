@@ -26,10 +26,10 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
         Container(
           padding: const EdgeInsets.only(left: 15),
           child: Text(
-            'OnePlus Nord CE 3 Lite 5G (Chromatic Gray, 8GB RAM, 128GB Storage)',
+            '\$${3000}',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 15),
+            style: TextStyle(fontSize: 18),
           ),
         ),
         Container(
@@ -41,6 +41,39 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
             overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 15, color: Colors.grey),
           ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.network(
+                GlobalVariables.products,
+                fit: BoxFit.fitWidth,
+                width: 100,
+              ),
+              Image.network(
+                GlobalVariables.products,
+                fit: BoxFit.fitWidth,
+                width: 100,
+              ),
+              Image.network(
+                GlobalVariables.products,
+                fit: BoxFit.fitWidth,
+                width: 100,
+              ),
+              Image.network(
+                GlobalVariables.products,
+                fit: BoxFit.fitWidth,
+                width: 100,
+              ),
+            ],
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 15).copyWith(left: 15),
+          alignment: Alignment.topLeft,
+          child: Text('See all deals', style: TextStyle(fontSize: 15, color: Colors.cyan[800])),
         ),
       ],
     );
