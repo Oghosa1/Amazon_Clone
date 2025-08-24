@@ -1,0 +1,7 @@
+Here are some Linux commands to find your local IP address:
+
+1. ip addr show
+   - This command shows detailed information about all your network interfaces, including the IP address.
+
+2. hostname -I
+   - This command directly prints the IP address(es) of your machine.

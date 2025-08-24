@@ -1,0 +1,42 @@
+// Provider
+class UserProvider extends ChangeNotifier {
+  User _user = User(
+    id: '',
+    name: '',
+    password: '',
+    email: '',
+    address: '',
+    type: '',
+    token: '',
+  );
+
+  User get user => _user;
+
+  void setUser(String user) {
+    _user = User.fromJson(user);
+    notifyListeners();
+  }
+}
+
+
+// Riverpod
+class UserNotifier extends StateNotifier<User> {
+  UserNotifier() : super(User(
+    id: '', 
+    name: '', 
+    password: '', 
+    email: '', 
+    address: '', 
+    type: '', 
+    token: '',
+  ));
+
+  void setUser(String userJson) {
+    state = User.fromJson(userJson);
+  }
+}
+
+// Provider for the UserNotifier
+final userProvider = StateNotifierProvider<UserNotifier, User>((ref) {
+  return UserNotifier();
+});
