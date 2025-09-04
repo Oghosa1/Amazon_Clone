@@ -34,14 +34,20 @@ class ProductDetailsServices {
         onSuccess: () {
           final responseBody = jsonDecode(response.body);
           // Backend returns { message: "...", user: {...} }
-          // Extract cart from the user object
-          final cart = responseBody['user']?['cart'] ?? [];
-          
-          UserModel userModel = userProvider.user.copyWith(
-            cart: cart,
-          );
+          // Extract cart from the user object and properly cast it
+          final dynamic cartData = responseBody['user']?['cart'] ?? [];
+
+          // Convert List<dynamic> to List<Map<String, dynamic>>
+          final List<Map<String, dynamic>> cart =
+              cartData is List
+                  ? cartData
+                      .map((item) => Map<String, dynamic>.from(item))
+                      .toList()
+                  : [];
+
+          UserModel userModel = userProvider.user.copyWith(cart: cart);
           userProvider.setUserFromModel(userModel);
-          
+
           // Extract the message from the backend response
           final message =
               responseBody['message'] ?? 'product added to cart successfully!';

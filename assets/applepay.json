@@ -1,0 +1,33 @@
+{
+  "provider": "apple_pay",
+  "data": {
+    "merchantIdentifier": "merchant.com.amazonclone.demo",
+    "displayName": "Amazon Clone Demo Store",
+    "merchantCapabilities": ["3DS", "debit", "credit"],
+    "supportedNetworks": ["amex", "visa", "discover", "masterCard"],
+    "countryCode": "NG",
+    "currencyCode": "NGN",
+    "requiredBillingContactFields": ["postalAddress"],
+    "requiredShippingContactFields": ["postalAddress", "phone", "email", "name"],
+    "shippingMethods": [
+      {
+        "amount": "0.00",
+        "detail": "Available within an hour",
+        "identifier": "in_store_pickup",
+        "label": "In-Store Pickup"
+      },
+      {
+        "amount": "2000.00",
+        "detail": "5-8 Business Days",
+        "identifier": "standard_shipping",
+        "label": "Standard Shipping"
+      },
+      {
+        "amount": "12000.00",
+        "detail": "1-3 Business Days",
+        "identifier": "express_shipping",
+        "label": "Express Shipping"
+      }
+    ]
+  }
+}

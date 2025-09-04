@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 import '../models/user_model.dart';
@@ -37,7 +39,49 @@ class UserProvider extends ChangeNotifier {
 
   // Easy way to get a cart product as a ProductModel
   ProductModel getCartProduct(int index) {
-    return ProductModel.fromMap(_userModel.cart[index]['product']);
+    final productData = _userModel.cart[index]['product'];
+
+    // Handle case where product might be stored as JSON string or Map
+    if (productData is String) {
+      // Check if it's a valid JSON string or just an ID
+      try {
+        if (productData.startsWith('{') && productData.endsWith('}')) {
+          // If it's a JSON string, decode it first
+          final Map<String, dynamic> productMap = json.decode(productData);
+          return ProductModel.fromMap(productMap);
+        } else {
+          // If it's just an ID string, return a minimal product with defaults
+          return ProductModel(
+            id: productData,
+            name: '',
+            description: '',
+            price: 0.0,
+            quantity: 0.0,
+            category: '',
+            images: const <String>[],
+          );
+        }
+      } catch (e) {
+        // If parsing fails, still fall back to minimal product using the ID
+        return ProductModel(
+          id: productData,
+          name: '',
+          description: '',
+          price: 0.0,
+          quantity: 0.0,
+          category: '',
+          images: const <String>[],
+        );
+      }
+    } else if (productData is Map<String, dynamic>) {
+      // If it's already a Map, use it directly
+      return ProductModel.fromMap(productData);
+    } else {
+      // Fallback for unexpected data types
+      throw Exception(
+        'Unexpected product data type in cart: ${productData.runtimeType}',
+      );
+    }
   }
 
   // Get the quantity of a cart item (how many of this product are in cart)

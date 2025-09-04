@@ -11,7 +11,7 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
-
+/amazon_server
 # IntelliJ related
 *.iml
 *.ipr
